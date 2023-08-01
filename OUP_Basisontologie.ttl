@@ -1,0 +1,54 @@
+@prefix : <http://www.example.com/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Connector rdf:type rdfs:Class .
+:Sensor rdf:type rdfs:Class .
+:EventType rdf:type rdfs:Class .
+:Statements rdf:type rdfs:Class .
+:Listeners rdf:type rdfs:Class .
+:VirtualSensor rdf:type rdfs:Class .
+
+:isProvidedBy rdf:type rdf:Property .
+:isProvidedBy rdfs:domain :Sensor .
+:isProvidedBy rdfs:range :Connector .
+
+:providedBy rdf:type rdf:Property .
+:providedBy rdfs:domain :Connector .
+:providedBy rdfs:range :Sensor ;
+rdfs:inverseOf :isProvidedBy .
+
+:isDescribedBy rdf:type rdf:Property .
+:isDescribedBy rdfs:domain :Sensor .
+:isDescribedBy rdfs:range :EventType .
+
+:describes rdf:type rdf:Property .
+:describes rdfs:domain :EventType .
+:describes rdfs:range :Sensor ;
+rdfs:inverseOf :isDescribedBy .
+
+:isExtendedBy rdf:type rdf:Property .
+:isExtendedBy rdfs:domain :EventType .
+:isExtendedBy rdfs:range :Statements .
+
+:extends rdf:type rdf:Property .
+:extends rdfs:domain :Statements .
+:extends rdfs:range :EventType ;
+rdfs:inverseOf :isExtendedBy .
+
+:isListenedBy rdf:type rdf:Property .
+:isListenedBy rdfs:domain :Statements .
+:isListenedBy rdfs:range :Listeners .
+
+:listensTo rdf:type rdf:Property .
+:listensTo rdfs:domain :Listeners .
+:listensTo rdfs:range :Statements ;
+rdfs:inverseOf :isListenedBy .
+
+:composedOf rdf:type rdf:Property ;
+rdfs:domain :VirtualSensor ;
+rdfs:range :Statements .
+
+:relatesTo rdf:type rdf:Property ;
+rdfs:domain :Statements ;
+rdfs:range :EventType .
