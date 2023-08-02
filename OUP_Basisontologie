@@ -7,15 +7,14 @@
 :EventType rdf:type rdfs:Class .
 :Statements rdf:type rdfs:Class .
 :Listeners rdf:type rdfs:Class .
-:VirtualSensor rdf:type rdfs:Class .
 
 :isProvidedBy rdf:type rdf:Property .
 :isProvidedBy rdfs:domain :Sensor .
 :isProvidedBy rdfs:range :Connector .
 
-:providedBy rdf:type rdf:Property .
-:providedBy rdfs:domain :Connector .
-:providedBy rdfs:range :Sensor ;
+:provides rdf:type rdf:Property .
+:provides rdfs:domain :Connector .
+:provides rdfs:range :Sensor ;
 rdfs:inverseOf :isProvidedBy .
 
 :isDescribedBy rdf:type rdf:Property .
@@ -40,15 +39,7 @@ rdfs:inverseOf :isExtendedBy .
 :isListenedBy rdfs:domain :Statements .
 :isListenedBy rdfs:range :Listeners .
 
-:listensTo rdf:type rdf:Property .
-:listensTo rdfs:domain :Listeners .
-:listensTo rdfs:range :Statements ;
-rdfs:inverseOf :isListenedBy .
-
-:composedOf rdf:type rdf:Property ;
-rdfs:domain :VirtualSensor ;
-rdfs:range :Statements .
-
-:relatesTo rdf:type rdf:Property ;
-rdfs:domain :Statements ;
-rdfs:range :EventType .
+:isListening rdf:type rdf:Property .
+:isListening rdfs:domain :Listeners .
+:isListening rdfs:range :Statements ;
+rdfs:inverseOf :isListenedBy 
