@@ -1,0 +1,247 @@
+@prefix : <http://www.example.com/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Connector rdf:type rdfs:Class .
+:Sensor rdf:type rdfs:Class ;
+         rdfs:subClassOf :ObservingEntity .
+:EventType rdf:type rdfs:Class ;
+           rdfs:subClassOf :DescriptableEntity .
+:Statements rdf:type rdfs:Class ;
+            rdfs:subClassOf :ObservingEntity .
+:Listeners rdf:type rdfs:Class .
+:VirtualSensor rdf:type rdfs:Class ;
+              rdfs:subClassOf :ObservingEntity .
+:Category rdf:type rdfs:Class ;
+          rdfs:subClassOf :DescriptableEntity .
+:ObservingEntity rdf:type rdfs:Class .
+:DescriptableEntity rdf:type rdfs:Class .
+
+:isGeneratedBy rdf:type rdf:Property ;
+rdfs:domain :Sensor ;
+rdfs:range :Connector .
+
+:generates rdf:type rdf:Property ;
+rdfs:domain :Connector ;
+rdfs:range :Sensor ;
+rdfs:inverseOf :isGeneratedBy .
+
+:isDescribedBy rdf:type rdf:Property ;
+rdfs:domain :ObservingEntity ;
+rdfs:range :DescriptableEntity .
+
+:describes rdf:type rdf:Property ;
+rdfs:domain :DescriptableEntity ;
+rdfs:range :ObservingEntity ;
+rdfs:inverseOf :isDescribedBy .
+
+:isExtendedBy rdf:type rdf:Property ;
+rdfs:domain :EventType ;
+rdfs:range :Statements .
+
+:extends rdf:type rdf:Property ;
+rdfs:domain :Statements ;
+rdfs:range :DescriptableEntity ;
+rdfs:inverseOf :isExtendedBy .
+
+:isListenedBy rdf:type rdf:Property ;
+rdfs:domain :Statements ;
+rdfs:range :Listeners .
+
+:listensTo rdf:type rdf:Property ;
+rdfs:domain :Listeners ;
+rdfs:range :Statements ;
+rdfs:inverseOf :isListenedBy .
+
+:relatesTo rdf:type rdf:Property ;
+rdfs:domain :Statements ;
+rdfs:range :EventType .
+
+:isRelatedTo rdf:type rdf:Property ;
+rdfs:domain :EventType ;
+rdfs:range :Statements ;
+rdfs:inverseOf :relatesTo .
+
+:resultsIn rdf:type rdf:Property ;
+rdfs:domain :VirtualSensor ;
+rdfs:range :EventType .
+
+:isGeneratedBy rdf:type rdf:Property ;
+rdfs:domain :Statements ;
+rdfs:range :VirtualSensor ;
+rdfs:inverseOf :resultsIn .
+
+:EnvironmentVirtualSensor rdf:type :VirtualSensor ;
+    :resultsIn :EnvironmentVirtualSensorEventType ;
+    :relatesTo :EnvironmentStatement .
+
+:WeatherEventType rdf:type :EventType ;
+    :isExtendedBy :WeatherEventTypeStatement ;
+    :isRelatedTo  :EnvironmentStatement .
+
+:AirPollutionEventType rdf:type :EventType ;
+    :isExtendedBy :AirPollutionEventTypeStatement ;
+    :isRelatedTo :EnvironmentStatement .
+
+:WeatherSensor rdf:type :Sensor ;
+    :isProvidedBy :WeatherConnector .
+    
+:WeatherSensor :isDescribedBy :WeatherEventType .
+
+:WeatherConnector rdf:type :Connector ;
+    :provides :WeatherSensor ;
+    :generates :WeatherEventType .
+
+:AirPollutionSensor rdf:type :Sensor ;
+    :isProvidedBy :AirPollutionConnector .
+
+:AirPollutionSensor :isDescribedBy :AirPollutionEventType .
+
+:AirPollutionConnector rdf:type :Connector ;
+    :provides :AirPollutionSensor ;
+    :generates :AirPollutionEventType .
+
+:WeatherEventType rdf:type :EventType ;
+    :isExtendedBy :WeatherEventTypeStatement ;
+    :isRelatedTo  :EnvironmentStatement ;
+    :isGeneratedBy :WeatherConnector .
+
+:AirPollutionEventType rdf:type :EventType ;
+    :isExtendedBy :AirPollutionEventTypeStatement ;
+    :isRelatedTo :EnvironmentStatement ;
+    :isGeneratedBy :AirPollutionConnector .
+
+:WeatherEventTypeStatement rdf:type :Statements ;
+    :isListenedBy :WeatherStatementListener .
+
+:AirPollutionEventTypeStatement rdf:type :Statements ;
+    :isListenedBy :AirPollutionStatementListener .
+
+:WeatherStatementListener rdf:type :Listeners ;
+    :listensTo :WeatherEventTypeStatement .
+
+:AirPollutionStatementListener rdf:type :Listeners ;
+    :listensTo :AirPollutionEventTypeStatement .
+
+:PublicTransportUtilizationVirtualSensor rdf:type :VirtualSensor ;
+    :resultsIn :PublicTransportUtilizationEventType ;
+    :relatesTo :PublicTransportUtilizationStatement .
+
+:UtilizationBusEventType rdf:type :EventType ;
+    :isExtendedBy :UtilizationBusEventTypeStatement ;
+    :isRelatedTo  :PublicTransportUtilizationStatement .
+
+:UtilizationCarSharingEventType rdf:type :EventType ;
+    :isExtendedBy :UtilizationCarSharingEventTypeStatement ;
+    :isRelatedTo :PublicTransportUtilizationStatement .
+
+:BusSensor rdf:type :Sensor ;
+    :isGeneratedBy :BusConnector .
+
+:BusSensor :isDescribedBy :UtilizationBusEventType .
+
+:BusConnector rdf:type :Connector ;
+    :generates :BusSensor ;
+    :generates :UtilizationBusEventType .
+
+:CarSharingSensor rdf:type :Sensor ;
+    :isGeneratedBy :CarSharingConnector .
+
+:CarSharingSensor :isDescribedBy :UtilizationCarSharingEventType .
+
+:CarSharingConnector rdf:type :Connector ;
+    :generates :CarSharingSensor ;
+    :generates :UtilizationCarSharingEventType .
+
+:UtilizationBusEventType rdf:type :EventType ;
+    :isExtendedBy :UtilizationBusEventTypeStatement ;
+    :isRelatedTo  :PublicTransportUtilizationStatement ;
+    :isGeneratedBy :BusConnector .
+
+:UtilizationCarSharingEventType rdf:type :EventType ;
+    :isExtendedBy :UtilizationCarSharingEventTypeStatement ;
+    :isRelatedTo :PublicTransportUtilizationStatement ;
+    :isGeneratedBy :CarSharingConnector .
+
+:UtilizationBusEventTypeStatement rdf:type :Statements ;
+    :isListenedBy :BusStatementListener .
+
+:UtilizationCarSharingEventTypeStatement rdf:type :Statements ;
+    :isListenedBy :CarSharingStatementListener .
+
+:BusStatementListener rdf:type :Listeners ;
+    :listensTo :UtilizationBusEventTypeStatement .
+
+:CarSharingStatementListener rdf:type :Listeners ;
+    :listensTo :UtilizationCarSharingEventTypeStatement .
+
+:TrafficCountVirtualSensor rdf:type :VirtualSensor ;
+    :resultsIn :TrafficCountEventType ;
+    :relatesTo :TrafficCountStatement .
+
+:BikeInductionLoopEventType rdf:type :EventType ;
+    :isExtendedBy :BikeInductionLoopEventTypeStatement ;
+    :isRelatedTo  :TrafficCountStatement .
+
+:CarInductionLoopEventType rdf:type :EventType ;
+    :isExtendedBy :CarInductionLoopEventTypeStatement ;
+    :isRelatedTo :TrafficCountStatement .
+
+:BikeSensor rdf:type :Sensor ;
+    :isGeneratedBy :BikeConnector .
+
+:BikeSensor :isDescribedBy :BikeInductionLoopEventType .
+
+:BikeConnector rdf:type :Connector ;
+    :generates :BikeSensor ;
+    :generates :BikeInductionLoopEventType .
+
+:CarSensor rdf:type :Sensor ;
+    :isGeneratedBy :CarConnector .
+
+:CarSensor :isDescribedBy :CarInductionLoopEventType .
+
+:CarConnector rdf:type :Connector ;
+    :generates :CarSensor ;
+    :generates :CarInductionLoopEventType .
+
+:BikeInductionLoopEventType rdf:type :EventType ;
+    :isExtendedBy :BikeInductionLoopEventTypeStatement ;
+    :isRelatedTo  :TrafficCountStatement ;
+    :isGeneratedBy :BikeConnector .
+
+:CarInductionLoopEventType rdf:type :EventType ;
+    :isExtendedBy :CarInductionLoopEventTypeStatement ;
+    :isRelatedTo :TrafficCountStatement ;
+    :isGeneratedBy :CarConnector .
+
+:BikeInductionLoopEventTypeStatement rdf:type :Statements ;
+    :isListenedBy :BikeStatementListener .
+
+:CarInductionLoopEventTypeStatement rdf:type :Statements ;
+    :isListenedBy :CarStatementListener .
+
+:BikeStatementListener rdf:type :Listeners ;
+    :listensTo :BikeInductionLoopEventTypeStatement .
+
+:CarStatementListener rdf:type :Listeners ;
+    :listensTo :CarInductionLoopEventTypeStatement .
+
+:EChargingEventType rdf:type :EventType ;
+    :isExtendedBy :EChargingEventTypeStatement ;
+    :isGeneratedBy :EChargingConnector .
+
+:EChargingSensor rdf:type :Sensor ;
+    :isGeneratedBy :EChargingConnector .
+
+:EChargingSensor :isDescribedBy :EChargingEventType .
+
+:EChargingConnector rdf:type :Connector ;
+    :generates :EChargingSensor ;
+    :generates :EChargingEventType .
+
+:EChargingEventTypeStatement rdf:type :Statements ;
+    :isListenedBy :EChargingStatementListener .
+
+:EChargingStatementListener rdf:type :Listeners ;
+    :listensTo :EChargingEventTypeStatement .

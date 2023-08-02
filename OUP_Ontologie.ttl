@@ -17,14 +17,14 @@
 :ObservingEntity rdf:type rdfs:Class .
 :DescriptableEntity rdf:type rdfs:Class .
 
-:isProvidedBy rdf:type rdf:Property ;
+:isGeneratedBy rdf:type rdf:Property ;
 rdfs:domain :Sensor ;
 rdfs:range :Connector .
 
-:provides rdf:type rdf:Property ;
+:generates rdf:type rdf:Property ;
 rdfs:domain :Connector ;
 rdfs:range :Sensor ;
-rdfs:inverseOf :isProvidedBy .
+rdfs:inverseOf :isGeneratedBy .
 
 :isDescribedBy rdf:type rdf:Property ;
 rdfs:domain :ObservingEntity ;
@@ -41,7 +41,7 @@ rdfs:range :Statements .
 
 :extends rdf:type rdf:Property ;
 rdfs:domain :Statements ;
-rdfs:range :EventType ;
+rdfs:range :DescriptableEntity ;
 rdfs:inverseOf :isExtendedBy .
 
 :isListenedBy rdf:type rdf:Property ;
@@ -57,6 +57,21 @@ rdfs:inverseOf :isListenedBy .
 rdfs:domain :Statements ;
 rdfs:range :EventType .
 
+:isRelatedTo rdf:type rdf:Property ;
+rdfs:domain :EventType ;
+rdfs:range :Statements ;
+rdfs:inverseOf :relatesTo .
+
 :resultsIn rdf:type rdf:Property ;
 rdfs:domain :VirtualSensor ;
 rdfs:range :EventType .
+
+:isGeneratedBy rdf:type rdf:Property ;
+rdfs:domain :Statements ;
+rdfs:range :VirtualSensor ;
+rdfs:inverseOf :resultsIn .
+
+
+
+
+
