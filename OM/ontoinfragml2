@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:xml:base="http://www.komit.com/ontology/OntoInfraGML/ontoinfragml.owl">
+    
+    <owl:Ontology rdf:about="http://www.komit.com/ontology/OntoInfraGML/ontoinfragml.owl">
+    </owl:Ontology>
+
+    <!-- Annotation properties -->
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+
+    <!-- Object Properties -->
+    <owl:ObjectProperty rdf:about="#Bridge">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#Drainage">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#Environmental">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#Site">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#Tunnel">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#Wastewater">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#WaterDistribution">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#OtherFacility">
+        <rdfs:range rdf:resource="#FacilityPart"/>
+    </owl:ObjectProperty>
+
+    <!-- Classes -->
+    <owl:Class rdf:about="#Facility"></owl:Class>
+    <owl:Class rdf:about="#FacilityPart">
+        <rdfs:subClassOf rdf:resource="#Facility"/>
+    </owl:Class>
+    <owl:Class rdf:about="#PhysicalElement">
+        <rdfs:subClassOf rdf:resource="#FacilityPart"/>
+    </owl:Class>
+    <owl:Class rdf:about="#Building">
+        <rdfs:subClassOf rdf:resource="#FacilityPart"/>
+    </owl:Class>
+    <owl:Class rdf:about="#Railway">
+        <rdfs:subClassOf rdf:resource="#FacilityPart"/>
+    </owl:Class>
+    <owl:Class rdf:about="#Road">
+        <rdfs:subClassOf rdf:resource="#FacilityPart"/>
+    </owl:Class>
+</rdf:RDF>
