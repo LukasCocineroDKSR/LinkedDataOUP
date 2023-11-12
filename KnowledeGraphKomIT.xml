@@ -29,24 +29,19 @@
     <owl:Class rdf:about="#Feature">
         <rdfs:subClassOf rdf:resource="http://www.theworldavatar.com/ontology/ontocitygml/OntoCityGML.owl#AbstractCityObjectType"/>
     </owl:Class>
-
     <owl:Class rdf:about="#Facility">
     <rdfs:subClassOf rdf:resource="#Feature"/>
     </owl:Class>
-
     <owl:Class rdf:about="#FacilityPart">
         <rdfs:subClassOf rdf:resource="#Facility"/>
     </owl:Class>
-
     <owl:Class rdf:about="#PhysicalElement">
         <rdfs:subClassOf rdf:resource="#FacilityPart"/>
     </owl:Class>
-
     <owl:Class rdf:about="#Building">
         <rdfs:subClassOf rdf:resource="#FacilityPart"/>
         <rdfs:subClassOf rdf:resource="http://www.theworldavatar.com/ontology/ontocitygml/OntoCityGML.owl#AbstractBuildingType"/>
     </owl:Class>
-
     <owl:Class rdf:about="#Bridge">
         <rdfs:subClassOf rdf:resource="#FacilityPart"/>
     </owl:Class>
@@ -91,8 +86,7 @@
     </owl:Class>
     <owl:Class rdf:about="#LinearLayer">
         <rdfs:subClassOf rdf:resource="#LandLayer"/>
-    </owl:Class>
-    
+    </owl:Class> 
     <owl:Class rdf:about="#Road">
         <rdfs:subClassOf rdf:resource="#FacilityPart"/>
     </owl:Class>
@@ -122,7 +116,37 @@
     <owl:Class rdf:about="#CrossSectionArea"/>
     <owl:Class rdf:about="#CrossSectionComponent"/>
     <owl:Class rdf:about="#CrossSectionPoint"/>
-
+    <owl:Class rdf:about="#Survey">
+        <rdfs:subClassOf rdf:resource="#Feature"/>
+    </owl:Class>
+    <owl:Class rdf:about="#Observation">
+        <rdfs:subClassOf rdf:resource="#Survey"/>
+    </owl:Class>
+    <owl:Class rdf:about="#Sampling">
+        <rdfs:subClassOf rdf:resource="#Observation"/>
+    </owl:Class>
+    <owl:Class rdf:about="#SamplingFeature">
+        <rdfs:subClassOf rdf:resource="#Observation"/>
+    </owl:Class>
+    <owl:Class rdf:about="#SamplingFeatureComplex">
+        <rdfs:subClassOf rdf:resource="#SamplingFeature"/>
+    </owl:Class>
+    <owl:Class rdf:about="#Equipment"/>
+    <owl:Class rdf:about="http://www.oup.com/ontology#Connector">
+        <rdfs:subClassOf rdf:resource="http://www.komit.com/ontology/OntoInfraGML/ontoinfragml.owl#Equipment"/>
+    </owl:Class>
+    <owl:Class rdf:about="http://www.oup.com/ontology#VirtualSensor ">
+        <rdfs:subClassOf rdf:resource="http://www.komit.com/ontology/OntoInfraGML/ontoinfragml.owl#Observation"/>
+    </owl:Class>
+    <owl:Class rdf:about="#SurveySensor">
+        <rdfs:subClassOf rdf:resource="#Equipment"/>
+    </owl:Class>
+    <owl:Class rdf:about="#SurveyProcess">
+        <rdfs:subClassOf rdf:resource="#Observation"/>
+    </owl:Class>
+    <owl:Class rdf:about="#SurveySensor">
+        <rdfs:subClassOf rdf:resource="#SurveyProcess"/>
+    </owl:Class>
 
    <!--  
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +205,19 @@
         <rdfs:domain rdf:resource="#RoadCrossSection"/>
         <rdfs:range rdf:resource="#CrossSectionSet"/>
     </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#hasSurveySensor">
+        <rdfs:domain rdf:resource="#Equipment"/>
+        <rdfs:range rdf:resource="#SurveySensor"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#hasSurveySensor">
+        <rdfs:domain rdf:resource="#SurveyProcess"/>
+        <rdfs:range rdf:resource="#SurveySensor"/>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#hasProcedure">
+        <rdfs:domain rdf:resource="#Observation"/>
+        <rdfs:range rdf:resource="#SurveyProcess"/>
+    </owl:ObjectProperty>
+
 
    <!--  
         ///////////////////////////////////////////////////////////////////////////////////////
